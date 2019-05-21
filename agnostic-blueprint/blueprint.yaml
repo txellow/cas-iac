@@ -1,15 +1,24 @@
-name: Agnostic-Blueprint # change the blueprint name to your team's name
+name: Team-13-agnostic # change the blueprint name to your team's name
 version: 1 # this version number should increase as you change your blueprint code
+inputs:
+  size:
+    type: string
+    enum:
+      - Small-Team13
+      - Medium-Team13
+      - Large-Team13
+    description: Size of Nodes
+    title: Node Size
 resources:
   Cloud_Machine_1:
     type: Cloud.Machine
     properties:
-      image: Ubuntu # you can set your own Image type on the Infrastructure tab, pay attention to this
-      flavor: Small # you can set your own definition of flavor on the infrastructure tab, pay attention to this too
+      image: ubuntu-team13 # you can set your own Image type on the Infrastructure tab, pay attention to this
+      flavor: '${input.size}' # you can set your own definition of flavor on the infrastructure tab, pay attention to this too
       networks:
-        - name: '${resource.Cloud_Network_1.name}' 
+        - name: '${resource.Cloud_Network_1.name}'
   Cloud_Network_1:
     type: Cloud.Network
     properties:
-      name: public
+      name: Team13-public
       networkType: existing
