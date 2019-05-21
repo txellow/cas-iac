@@ -1,4 +1,4 @@
-name: Team-13-agnostic # change the blueprint name to your team's name
+name: Team-13-blueprint # change the blueprint name to your team's name
 version: 1 # this version number should increase as you change your blueprint code
 inputs:
   size:
