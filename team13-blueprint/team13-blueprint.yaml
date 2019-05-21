@@ -1,0 +1,36 @@
+name: Team-13-agnostic # change the blueprint name to your team's name
+version: 1 # this version number should increase as you change your blueprint code
+inputs:
+  size:
+    type: string
+    enum:
+      - Small-Team13
+      - Medium-Team13
+      - Large-Team13
+    description: Size of Nodes
+    title: Node Size
+resources:
+  Cloud_Machine_1:
+    type: Cloud.Machine
+    properties:
+      image: ubuntu-team13 # you can set your own Image type on the Infrastructure tab, pay attention to this
+      flavor: '${input.size}' # you can set your own definition of flavor on the infrastructure tab, pay attention to this too
+      networks:
+        - name: '${resource.Cloud_Network_1.name}'
+  Cloud_Network_1:
+    type: Cloud.Network
+    properties:
+      name: Team13-public
+      networkType: existing
+     cloudConfig: |
+        #cloud-config
+        repo_update: true
+        repo_upgrade: all
+        packages:
+         - apache2
+         - mysql-server
+         - php-mysql
+        runcmd:
+         - "echo '<?php phpinfo();' > /var/www/index.php"
+         - "rm /var/www/index.html"
+        #cloud-config
