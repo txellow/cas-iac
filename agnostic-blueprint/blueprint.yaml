@@ -22,3 +22,17 @@ resources:
     properties:
       name: Team13-public
       networkType: existing
+     cloudConfig: |
+        #cloud-config
+        repo_update: true
+        repo_upgrade: all
+
+        packages:
+         - apache2
+         - mysql-server
+         - php-mysql
+
+        runcmd:
+         - "echo '<?php phpinfo();' > /var/www/index.php"
+         - "rm /var/www/index.html"
+        #cloud-config
